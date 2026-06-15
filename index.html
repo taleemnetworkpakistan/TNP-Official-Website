@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taleem Network Pakistan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green:       #1A7A3C;
+    --green-dark:  #0E5228;
+    --green-light: #E8F5EE;
+    --gold:        #C8882A;
+    --gold-light:  #F5E4C3;
+    --cream:       #FAF8F4;
+    --ink:         #1A1A1A;
+    --muted:       #5A5A5A;
+    --white:       #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 70px;
+    background: rgba(10,42,20,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(200,136,42,0.3);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo img { height: 46px; width: 46px; border-radius: 50%; object-fit: cover; }
+  .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a2a14 0%, #1A7A3C 60%, #0E5228 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-logo {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    border: 3px solid rgba(200,136,42,0.6);
+    object-fit: cover;
+    margin-bottom: 32px;
+    animation: fadeDown 0.8s ease both;
+    box-shadow: 0 0 40px rgba(200,136,42,0.25);
+  }
+
+  .hero-arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    animation: fadeDown 0.9s ease 0.1s both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    animation: fadeDown 1s ease 0.2s both;
+  }
+  .hero h1 span { color: var(--gold); }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255,255,255,0.75);
+    margin-top: 20px;
+    max-width: 560px;
+    font-weight: 300;
+    animation: fadeDown 1s ease 0.35s both;
+  }
+
+  .hero-sub {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: fadeDown 1s ease 0.45s both;
+  }
+
+  .hero-cta-group {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    margin-top: 44px;
+    animation: fadeDown 1s ease 0.55s both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 14px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #e0a030; transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: var(--white);
+    padding: 14px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  .scroll-hint {
+    margin-top: 60px;
+    animation: bounce 2s infinite 1.5s;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 90px 5vw; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 4px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .section-title span { color: var(--green); }
+  .section-body {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 680px;
+    margin-top: 16px;
+  }
+
+  /* ── QUOTE BANNER ── */
+  .quote-banner {
+    background: var(--green-dark);
+    padding: 60px 5vw;
+    text-align: center;
+  }
+  .quote-banner blockquote {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--gold);
+    font-style: italic;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .quote-banner cite {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    font-style: normal;
+  }
+
+  /* ── VISION MISSION ── */
+  .vm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin-top: 50px;
+  }
+  .vm-card {
+    padding: 50px 44px;
+    position: relative;
+  }
+  .vm-card.vision { background: var(--green); }
+  .vm-card.mission { background: var(--green-dark); }
+  .vm-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  .vm-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .vm-card p { color: rgba(255,255,255,0.82); font-size: 0.98rem; line-height: 1.75; }
+
+  /* ── CONCEPT ── */
+  .concept-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .concept-text {}
+  .concept-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .highlight-card {
+    background: var(--white);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .highlight-card h4 { font-weight: 700; color: var(--green-dark); margin-bottom: 6px; font-size: 0.95rem; }
+  .highlight-card p { font-size: 0.88rem; color: var(--muted); }
+
+  /* ── OBJECTIVES ── */
+  .objectives-section { background: var(--green-light); }
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+  }
+  .obj-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 28px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .obj-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .obj-icon {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .obj-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── STATS ── */
+  .stats-section {
+    background: linear-gradient(135deg, #0a2a14 0%, #1A7A3C 100%);
+    padding: 80px 5vw;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px;
+    margin-top: 50px;
+  }
+  .stat-card {
+    padding: 40px 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── EDUCATION POLICY ── */
+  .policy-inner {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .policy-points { margin-top: 30px; display: flex; flex-direction: column; gap: 16px; }
+  .policy-point {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .policy-dot {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+  .policy-point p { font-size: 0.95rem; color: var(--muted); }
+
+  .policy-quote-box {
+    background: var(--green);
+    padding: 44px;
+    border-radius: 4px;
+    position: sticky;
+    top: 100px;
+  }
+  .policy-quote-box p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .policy-quote-box cite {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── ACTION PLAN ── */
+  .action-section { background: var(--cream); }
+  .action-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .action-steps { margin-top: 30px; counter-reset: steps; display: flex; flex-direction: column; gap: 28px; }
+  .action-step { display: flex; gap: 20px; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0;
+    width: 42px; height: 42px;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .action-step p { font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
+
+  .appeal-box {
+    background: var(--gold-light);
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    padding: 40px;
+    text-align: center;
+  }
+  .appeal-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--green-dark);
+    margin-bottom: 16px;
+  }
+  .appeal-box p { font-size: 0.95rem; color: #5a4010; line-height: 1.7; margin-bottom: 24px; }
+
+  /* ── CONCERN ── */
+  .concern-section {
+    background: #f9f0e8;
+    border-top: 4px solid var(--gold);
+  }
+  .concern-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .concern-text p { font-size: 1.05rem; color: var(--muted); line-height: 1.8; }
+  .concern-text p + p { margin-top: 16px; }
+  .concern-callout {
+    background: var(--white);
+    border-left: 5px solid #c0392b;
+    padding: 36px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .concern-callout h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #c0392b;
+    margin-bottom: 14px;
+  }
+  .concern-callout ul { padding-left: 18px; }
+  .concern-callout ul li { font-size: 0.9rem; color: var(--muted); margin-bottom: 8px; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--green-dark);
+    padding: 90px 5vw;
+    text-align: center;
+  }
+  .contact-section .section-label { color: var(--gold); border-color: var(--gold); }
+  .contact-section .section-title { color: var(--white); }
+  .contact-section .section-title span { color: var(--gold); }
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    margin-top: 52px;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 36px 40px;
+    min-width: 220px;
+    text-align: left;
+  }
+  .contact-card-icon { font-size: 1.8rem; margin-bottom: 14px; }
+  .contact-card h4 { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .contact-card p, .contact-card a { font-size: 0.95rem; color: rgba(255,255,255,0.8); text-decoration: none; display: block; line-height: 1.6; }
+  .contact-card a:hover { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050f08;
+    padding: 28px 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-logo { display: flex; align-items: center; gap: 10px; }
+  .footer-logo img { height: 36px; border-radius: 50%; }
+  .footer-logo span { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(8px); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .vm-grid, .concept-inner, .policy-inner, .action-inner, .concern-grid { grid-template-columns: 1fr; gap: 32px; }
+    section { padding: 60px 5vw; }
+    .vm-card { padding: 36px 28px; }
+    .contact-card { min-width: unset; width: 100%; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="logo.jpg" alt="TNP Logo" />
+    <span>Taleem Network Pakistan</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#objectives">Objectives</a></li>
+    <li><a href="#policy">Policy</a></li>
+    <li><a href="#action">Action Plan</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-logo" src="logo.jpg" alt="Taleem Network Pakistan Logo" />
+  <p class="hero-arabic">مِنَ الظُّلُمَاتِ إِلَى النُّوْرِ</p>
+  <h1>Taleem<br/><span>Network</span> Pakistan</h1>
+  <p class="hero-tagline">Bringing every Pakistani child out of the darkness of ignorance into the light of knowledge.</p>
+  <p class="hero-sub">A Nationwide Project of Nazriya Pakistan Council, Islamabad</p>
+  <div class="hero-cta-group">
+    <a href="#action" class="btn-primary">Sponsor a Child</a>
+    <a href="#about" class="btn-outline">Learn More</a>
+  </div>
+  <p class="scroll-hint">↓ &nbsp; Scroll to explore</p>
+</section>
+
+<!-- QUOTE BANNER -->
+<div class="quote-banner">
+  <blockquote>
+    "To seek knowledge (education) is obligatory for every man and woman."
+    <cite>— Prophet Mohammad (pbuh) &nbsp;·&nbsp; Bukhari Sharif</cite>
+  </blockquote>
+</div>
+
+<!-- VISION & MISSION -->
+<section id="about" style="padding-bottom: 0; padding-top: 80px;">
+  <div style="max-width: 680px;">
+    <span class="section-label">Who We Are</span>
+    <h2 class="section-title">Our <span>Vision</span> &amp; Mission</h2>
+    <p class="section-body">TNP is a voluntary, nation-building project under the Nazriya Pakistan Council (Trust) at Aiwan-i-Quaid, Islamabad — dedicated to universal literacy for Pakistani boys and girls.</p>
+  </div>
+  <div class="vm-grid">
+    <div class="vm-card vision">
+      <div class="vm-card-icon">📖</div>
+      <h3>Vision</h3>
+      <p>Knowledge is bliss. It makes a person complete. To acquire knowledge and wisdom, we seek education. TNP strives to bring literacy to every Pakistani child — boys and girls alike — so they may know their full potential.</p>
+    </div>
+    <div class="vm-card mission">
+      <div class="vm-card-icon">🎯</div>
+      <h3>Mission</h3>
+      <p>TNP envisages making a valuable contribution to Pakistan's all-important literacy drive. Through the philanthropic public, we aim to find easy, affordable ways to enrol out-of-school children — providing quality education and comprehensive personality development through <em>Taleem o Tarbiyat &amp; Tazkiyya</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept" style="padding-top: 90px;">
+  <div class="concept-inner">
+    <div class="concept-text">
+      <span class="section-label">The Concept</span>
+      <h2 class="section-title">How <span>TNP</span> Works</h2>
+      <p class="section-body">TNP's first project establishes two dedicated model Non-formal Primary Classes with an Accelerated Learning Program (ALP) on existing school premises, starting in the suburban towns of Meharbadi, Islamabad Capital Territory.</p>
+      <p class="section-body" style="margin-top: 14px;">A 2023 JICA survey confirmed that large numbers of primary-age children — boys and girls — remain out of school across almost all union councils of ICT. TNP is built to address exactly this gap.</p>
+    </div>
+    <div class="concept-highlights">
+      <div class="highlight-card">
+        <h4>Non-Formal Primary Classes</h4>
+        <p>Two model ALP classes held on running school premises — removing infrastructure barriers for out-of-school children.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>JICA Partnership</h4>
+        <p>Planned partly as a collaborative arrangement with the Japan International Cooperation Agency, grounding the program in rigorous field data.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>No Bureaucratic Hurdles</h4>
+        <p>TNP intentionally keeps its implementation model simple — empowering philanthropists to act directly without red tape.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>Short-Term, Scalable Projects</h4>
+        <p>Each program cycle is designed as a short-term project that can be replicated and scaled across Pakistan's union councils.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section id="objectives" class="objectives-section">
+  <span class="section-label">What We Teach</span>
+  <h2 class="section-title">Program <span>Objectives</span></h2>
+  <p class="section-body">Every TNP classroom delivers a holistic curriculum that goes beyond literacy — nurturing faith, character, and life skills alongside core academics.</p>
+  <div class="objectives-grid">
+    <div class="obj-card">
+      <div class="obj-icon">🕌</div>
+      <p><strong>Islamic Studies</strong> — Grounding children in religious knowledge and values as a foundation for ethical life.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🗣️</div>
+      <p><strong>Urdu &amp; English</strong> — First and second language skills: listening, reading with comprehension, speaking, and writing.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🌱</div>
+      <p><strong>Character Building</strong> — Societal values, ethics, norms, and healthy lifestyle habits for well-rounded personality development.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🔢</div>
+      <p><strong>Numeracy &amp; Mathematics</strong> — Core numeracy skills and basic mathematics for practical life and further education.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🔬</div>
+      <p><strong>General Science</strong> — Age-appropriate science concepts to build curiosity and foundational scientific thinking.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🌍</div>
+      <p><strong>General Knowledge</strong> — Awareness of Pakistan, the world, and civic life to create informed young citizens.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🎓</div>
+      <p><strong>FREE Quality Education</strong> — No child is turned away. TNP provides education free of cost to poor and disadvantaged children.</p>
+    </div>
+    <div class="obj-card">
+      <div class="obj-icon">🏥</div>
+      <p><strong>FREE Annual Medical Check-Up</strong> — Ensuring every enrolled child's health is monitored and supported throughout the year.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div style="text-align:center">
+    <span class="section-label" style="color:var(--gold); border-color: var(--gold);">The Scale of the Problem</span>
+    <h2 class="section-title" style="color:var(--white); margin-top: 8px;">Pakistan's <span style="color:var(--gold)">Literacy Crisis</span></h2>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">26M+</div>
+      <div class="stat-label">Out-of-school children in Pakistan</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">58%</div>
+      <div class="stat-label">Adult literacy rate nationally</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">ICT</div>
+      <div class="stat-label">All union councils affected (JICA 2023)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">1st</div>
+      <div class="stat-label">TNP model project — Meharbadi, Islamabad</div>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION POLICY -->
+<section id="policy">
+  <div class="policy-inner">
+    <div>
+      <span class="section-label">National Context</span>
+      <h2 class="section-title">Pakistan's <span>Education Policy</span></h2>
+      <p class="section-body">Pakistan's Constitution guarantees education as a fundamental right. TNP's work directly supports the national policy goals of access, quality, and equality.</p>
+      <div class="policy-points">
+        <div class="policy-point">
+          <div class="policy-dot"></div>
+          <p>Single National Curriculum (SNC) to ensure uniform academic standards across all schools.</p>
+        </div>
+        <div class="policy-point">
+          <div class="policy-dot"></div>
+          <p>100% enrollment at primary and secondary levels — eliminating gender and regional disparities.</p>
+        </div>
+        <div class="policy-point">
+          <div class="policy-dot"></div>
+          <p>Expansion of technical and vocational training programs linked to employment and economic growth.</p>
+        </div>
+        <div class="policy-point">
+          <div class="policy-dot"></div>
+          <p>Promotion of girls' education and integration of digital learning systems in schools nationwide.</p>
+        </div>
+        <div class="policy-point">
+          <div class="policy-dot"></div>
+          <p>Strengthening teacher training, modernizing infrastructure, and expanding science-based learning.</p>
+        </div>
+      </div>
+    </div>
+    <div class="policy-quote-box">
+      <p>"When you have got that light of knowledge by means of education and when you have made yourself strong economically and industrially, then you have got to prepare yourselves for your defence against external aggression and to maintain internal security."</p>
+      <cite>— Quaid-i-Azam Mohammad Ali Jinnah<br/>Address, Punjab Muslim Students' Federation, March 2, 1941</cite>
+    </div>
+  </div>
+</section>
+
+<!-- GENUINE CONCERN -->
+<section class="concern-section">
+  <span class="section-label" style="color:#c0392b; border-color:#c0392b;">Alarming Reality</span>
+  <h2 class="section-title">The <span>Stakes</span> Are High</h2>
+  <div class="concern-grid">
+    <div class="concern-text">
+      <p>When children remain outside the school system and grow up illiterate, the consequences ripple through all of society. Without education to guide them, these young people become vulnerable to exploitation, extremism, and a life of poverty. The darkness of ignorance does not stay contained — it spreads.</p>
+      <p>The Taleem Network Pakistan exists precisely to break this cycle. With every conscious citizen's cooperation, we can banish illiteracy and mould future generations into educated, enlightened, and prosperous members of the global community.</p>
+      <p style="margin-top: 16px; font-style:italic; color: var(--green-dark); font-weight: 600;">It is a gigantic task — but not Mission Impossible.</p>
+    </div>
+    <div class="concern-callout">
+      <h4>⚠ Without education, children risk...</h4>
+      <ul>
+        <li>Falling prey to anti-social elements and extremism</li>
+        <li>Drug addiction and criminal pathways</li>
+        <li>Permanent poverty and menial labour</li>
+        <li>Exclusion from civic and national life</li>
+        <li>A bleak and dangerous future for all of society</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section id="action" class="action-section">
+  <div class="action-inner">
+    <div>
+      <span class="section-label">Get Involved</span>
+      <h2 class="section-title">Action <span>Plan</span></h2>
+      <p class="section-body">TNP's action plan is designed for simplicity. No bureaucracy. No red tape. Just ordinary Pakistanis choosing to change a child's fate.</p>
+      <div class="action-steps">
+        <div class="action-step">
+          <div class="step-num">1</div>
+          <p><strong>Identify a child</strong> in your area who is of primary school age but not attending school due to poverty or lack of support.</p>
+        </div>
+        <div class="action-step">
+          <div class="step-num">2</div>
+          <p><strong>Choose a school</strong> — any affordable school in your vicinity, from Rs. 50/month to Rs. 500/month. The goal is enrolment, not prestige.</p>
+        </div>
+        <div class="action-step">
+          <div class="step-num">3</div>
+          <p><strong>Sponsor their education</strong> — cover fees, stationery, or uniforms. Any amount of support can change a child's trajectory.</p>
+        </div>
+        <div class="action-step">
+          <div class="step-num">4</div>
+          <p><strong>Watch them flourish</strong> — the day that child excels and serves society will be your greatest moment of pride and elation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="appeal-box">
+      <h3>Hold the Hand of One Child</h3>
+      <p>This is our fervent appeal to the well-to-do brothers and sisters of this beloved country: come forward and get one — or more — child admitted to a school. The primary aim is not costly institutions. The primary aim is to bring deserving children <em>within the boundary walls of a school</em>.</p>
+      <a href="#contact" class="btn-primary" style="display: inline-block;">Contact TNP Today</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <span class="section-label">Reach Us</span>
+  <h2 class="section-title">Looking Forward to Your <span>Cooperation</span></h2>
+  <p style="color: rgba(255,255,255,0.65); max-width: 520px; margin: 14px auto 0; font-size: 0.98rem;">Every message of support matters. Get in touch with Taleem Network Pakistan today and help us light up Pakistan's future.</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-card-icon">📍</div>
+      <h4>Address</h4>
+      <p>Aiwan-i-Quaid (Fatima Jinnah Park)<br/>Mehran Gate #1, Sector F-9<br/>Islamabad, Pakistan</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">📞</div>
+      <h4>Phone &amp; Fax</h4>
+      <a href="tel:+925122556330">+92 51 2255 633</a>
+      <a href="tel:+925122609490">+92 51 2260 949</a>
+      <p style="margin-top:8px; font-size:0.8rem; color:rgba(255,255,255,0.4);">Fax: 051-2261402</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">✉️</div>
+      <h4>Email</h4>
+      <a href="mailto:taleemnetworkpakistan@hotmail.com">taleemnetworkpakistan<br/>@hotmail.com</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">🌐</div>
+      <h4>Organisation</h4>
+      <a href="http://npctisb.com" target="_blank">npctisb.com</a>
+      <p style="margin-top:6px; font-size:0.85rem; color:rgba(255,255,255,0.55);">Nazriya Pakistan Council (Trust)</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.jpg" alt="TNP" />
+    <span>Taleem Network Pakistan &nbsp;·&nbsp; Nazriya Pakistan Council (Trust)</span>
+  </div>
+  <p>© 2025 Taleem Network Pakistan. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
